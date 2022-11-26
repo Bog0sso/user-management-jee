@@ -56,6 +56,9 @@ public class Login extends HttpServlet {
 			response.sendRedirect("users");
 		}else {
 			request.setAttribute("connexionFailed", true);
+			request.setAttribute("login", login);
+			request.setAttribute("password", password);
+			
 			getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
 		}
 						
