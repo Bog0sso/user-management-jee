@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.User;
 import dao.UserDAO;
+import forms.AddUserForm;
 
 /**
  * Servlet implementation class ToAddUser
@@ -41,13 +42,17 @@ public class AddUser extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String login = request.getParameter("login");
-		String lastName = request.getParameter("lastName");
-		String name = request.getParameter("name");
-		String password = request.getParameter("password");
-		User user = new User(name, lastName, login,password);
-		UserDAO.addUser(user);
-		response.sendRedirect("users");
+		AddUserForm form = new AddUserForm(request);
+		if(form.ajouter()) {
+			response.sendRedirect("users");
+		}else {
+			
+			request.setAttribute("user", form.getUser());
+			request.setAttribute("status", form.isStatus());
+			request.setAttribute("statusMessage", form.getStatusMessage());
+			request.setAttribute("errors", form.getErrors());
+			getServletContext().getRequestDispatcher("/WEB-INF/addUser.jsp").forward(request, response);
+		}
 	}
 
 }
