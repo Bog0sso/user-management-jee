@@ -18,7 +18,7 @@ import dao.UserDAO;
 @WebServlet("/updateuser")
 public class UpdateUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	UserDAO userDAO = new UserDAO();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -32,8 +32,8 @@ public class UpdateUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int id = Integer.parseInt(request.getParameter("id")) ;
-		request.setAttribute("user", UserDAO.getUser(id));
+		int id = Integer.parseInt(request.getParameter("id"));
+		request.setAttribute("user", userDAO.getUser(id));
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/updateUser.jsp");
 		dispatcher.forward(request, response);
 	}
@@ -48,7 +48,7 @@ public class UpdateUser extends HttpServlet {
 		String lastName = request.getParameter("lastName");
 		String name = request.getParameter("name");
 		String password = request.getParameter("password");
-		UserDAO.updateUser(id,name, lastName, login,password);
+		userDAO.updateUser(id, name, lastName, login, password);
 		response.sendRedirect("users");
 	}
 

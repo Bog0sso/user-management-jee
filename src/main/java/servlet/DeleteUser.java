@@ -17,7 +17,7 @@ import dao.UserDAO;
 @WebServlet("/deleteuser")
 public class DeleteUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	UserDAO userDAO = new UserDAO();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -31,7 +31,7 @@ public class DeleteUser extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		UserDAO.deleteUser(id);
+		userDAO.deleteUser(id);
 		response.sendRedirect("users");	
 	}
 

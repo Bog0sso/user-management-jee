@@ -25,7 +25,7 @@ public class AddUserForm {
 	private static final String MESSAGE_ADD_USER_SUCCEEDED = "L'ajout de l'utilisateur a été effectué avec succès";
 	private static final String MESSAGE_EMPTY_FIELD_ERROR = "Vous devez renseigner ce champ";
 	private static final String MESSAGE_DIFFERENT_PASSWORD_ERROR = "Les mots de passe fournis ne sont pas similaires";
-	
+	private UserDAO userDAO = new UserDAO();
 	public AddUserForm(HttpServletRequest request) {
 		this.request = request;
 		this.status = false;
@@ -42,7 +42,7 @@ public class AddUserForm {
 		this.validatePasswords();
 		
 		if(this.errors.isEmpty()) {
-			UserDAO.addUser(user);
+			userDAO.addUser(user);
 			this.status = true;
 			this.statusMessage = MESSAGE_ADD_USER_SUCCEEDED;
 		}

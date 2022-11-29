@@ -19,12 +19,13 @@ import dao.UserDAO;
 @WebServlet("/users")
 public class ListUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	UserDAO userDAO = new UserDAO();
        
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			request.setAttribute("users", UserDAO.listUser());
+			request.setAttribute("users", userDAO.listUser());
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/listUsers.jsp");
 			dispatcher.forward(request, response);
 	}

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Add user</title>
+<title>Update user</title>
 </head>
 <body>
 
